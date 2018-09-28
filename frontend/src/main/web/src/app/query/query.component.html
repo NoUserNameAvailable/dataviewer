@@ -1,0 +1,66 @@
+<h1>Title</h1>
+{{queryParams | json}}
+<mat-card class="my-card">
+
+  <mat-card-header>
+    <mat-card-title><h3>Query parameters</h3></mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form class="test-form">
+      <mat-form-field>
+        <mat-select placeholder="Database" id="database" [(ngModel)]="queryParams.database"
+                    (ngModelChange)="databaseChange()"
+                    name="selectedDatabase">
+          <mat-option *ngFor="let db of databases" [value]="db">{{db}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Table" id="table" [(ngModel)]="queryParams.table" (ngModelChange)="tableChange()"
+                    name="selectedTable">
+          <mat-option *ngFor="let tab of tables" [value]="tab">{{tab}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Variable" id="variable" [(ngModel)]="queryParams.variable"
+                    (ngModelChange)="variableChange()" name="selectedVariable">
+          <mat-option *ngFor="let variable of variables" [value]="variable">{{variable}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+
+</mat-card>
+
+<mat-card *ngIf="dataSource != null">
+  <mat-card-header>
+    <mat-card-title><h3>Results</h3></mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p *ngIf="queryResult.rows > 100"> Partial result, only 100 rows on {{queryResult.rows}}.</p>
+    <p *ngIf="queryResult.rows <= 100"> Full rows are displayed.</p>
+    <table mat-table class="mat-elevation-z8"  [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Value</th>
+        <td mat-cell *matCellDef="let element"> {{element.name}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="count">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Count</th>
+        <td mat-cell *matCellDef="let element"> {{element.count}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="averageAge">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Average age</th>
+        <td mat-cell *matCellDef="let element"> {{element.averageAge}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-card-content>
+</mat-card>
+
+
+
+
