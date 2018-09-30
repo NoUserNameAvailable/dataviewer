@@ -39,3 +39,5 @@ hs_err_pid*
 /frontend/src/main/web/node/
 /frontend/src/main/web/node_modules/
 /.idea/
+/backend/backend.iml
+/frontend/frontend.iml
