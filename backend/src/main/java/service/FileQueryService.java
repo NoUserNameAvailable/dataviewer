@@ -131,7 +131,11 @@ public final class FileQueryService {
 
     public List<String> getDatabases() {
         File databesDir = new File("data");
-        return new ArrayList<>(Arrays.asList(Objects.requireNonNull(databesDir.list())));
+        String[] files = databesDir.list();
+        if(files == null){
+            return new ArrayList<>();
+        }
+        return new ArrayList<>(Arrays.asList(files));
     }
 
 
